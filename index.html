@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bento Box Layout</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script type="module" src="./firebase.js"></script> <!-- Import Firebase config -->
+  <style>
+  /* Custom Scrollbar */
+  #inventoryDisplay.custom-scrollbar::-webkit-scrollbar {
+      width: 3px !important; /* Set a thin width for the scrollbar */
+  }
+
+  #inventoryDisplay.custom-scrollbar::-webkit-scrollbar-track {
+      background-color: #e2e8f0 !important; /* Light gray track background */
+      border-radius: 10px !important;
+  }
+
+  #inventoryDisplay.custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #1d4ed8 !important; /* Blue-700 color for the thumb */
+      border-radius: 10px !important;
+  }
+
+  #inventoryDisplay.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background-color: #1e40af !important; /* Darker blue for hover effect */
+  }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="w-full max-w-6xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="flex flex-col lg:flex-row">
+      <!-- Left Side: Form -->
+      <div class="w-full lg:w-1/2 p-8 bg-gray-50 border-r border-gray-200">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-6">Product Form</h2>
+        <form id="productForm" class="space-y-4">
+          <div>
+            <label class="block text-gray-600 font-medium mb-2" for="productName">Product Name</label>
+            <input type="text" id="productName" name="productName" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter product name" required>
+          </div>
+          <div>
+            <label class="block text-gray-600 font-medium mb-2" for="wholesalePrice">Wholesale Price</label>
+            <input type="number" id="wholesalePrice" name="wholesalePrice" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter wholesale price" required>
+          </div>
+          <div>
+            <label class="block text-gray-600 font-medium mb-2" for="barcode">Barcode</label>
+            <input type="text" id="barcode" name="barcode" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter barcode" required>
+          </div>
+          <button id="Addproduct" type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700">Add Product</button>
+        </form>
+      </div>
+
+      <!-- Right Side: Inventory Display -->
+      <div class="w-full lg:w-1/2 p-8 bg-white">
+        <div class="flex flex-col h-[600px]">
+          <div class="flex items-center justify-between mb-6 flex-shrink-0">
+            <h2 class="text-2xl font-semibold text-gray-700">Inventory Display</h2>
+            <!-- Search Box -->
+            <input 
+              type="text" 
+              id="searchBox" 
+              class="w-1/2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" 
+              placeholder="Search product..."
+            >
+          </div>
+      
+          <!-- Inventory Display Wrapper -->
+          <div class="flex-1 overflow-hidden">
+            <div id="inventoryDisplay" class="overflow-y-auto h-96 custom-scrollbar"></div>
+          </div>
+      
+          <!-- Print Button -->
+          <div class="mt-4 text-center">
+            <button 
+  id="printButton" 
+  class="w-full bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-indigo-700">
+  Print Order
+</button>
+
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <script type="module" src="index.js"></script>
+</body>
+</html>
